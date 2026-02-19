@@ -58,15 +58,16 @@ class CardPanel extends JPanel {
     // it will store the name of the card as well as it's corresponding image
     private java.util.HashMap<String, ImageIcon> icons = new java.util.HashMap<>();
 
+    // create a string array for the different ranks
+    private static final String[] ranks = {"ace","2", "3","4","5","6","7","8", "9", "10", "jack", "queen", "king"};
+
+    // create a string array for the different suits
+    private static final String[] suits = {"clubs","diamonds", "hearts", "spades"};
+
+
     public CardPanel () {
         // may need to change if this green is too bright
         setBackground(Color.GREEN);
-
-        // create a string array for the different ranks
-        String[] ranks = {"ace","2", "3","4","5","6","7","8", "9", "10", "jack", "queen", "king"};
-
-        // create a string array for the different suits
-        String[] suits = {"clubs","diamonds", "hearts", "spades"};
 
         // we will use this double for look to make sure that we add every combination of suits
         for (String rank : ranks){
