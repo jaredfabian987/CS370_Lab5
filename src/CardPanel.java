@@ -26,7 +26,8 @@ public class CardPanel extends JPanel{
 
     public CardPanel () {
         // may need to change if this green is too bright
-        setBackground(Color.GREEN);
+        // og was Color.GREEN
+        setBackground(new Color(0,100,0));
 
         // we will use this double for look to make sure that we add every combination of cards
         // into the deck list
@@ -59,7 +60,7 @@ public class CardPanel extends JPanel{
     @Override
     public void paintComponent (Graphics gfx){
         // always clear the screen before redrawing
-        super.paintComponents(gfx);
+        super.paintComponent(gfx);
 
         int cols = 13, gapX = 27, gapY = 40;
 
@@ -81,8 +82,8 @@ public class CardPanel extends JPanel{
             ImageIcon icon = images.get(deck.get(i));
             icon.paintIcon(this,gfx, x, y);
 
-        }
+        } // end of deck loop
 
 
-    }
-}
+    } // end of paintComponent
+} // end of CardPanel class
