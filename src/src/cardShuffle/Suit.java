@@ -12,7 +12,11 @@ public enum Suit {
         this.type = type;
     }
 
-    public String getSuitType(){
+    public Suit getSuitType(){
+        return this;
+    }
+
+    public String getSuitTypeStr(){
         return this.type;
     }
 }

@@ -15,13 +15,13 @@ public enum Rank {
     QUEEN("queen"),
     KING("king");
 
-    private String type;
+    private final String type;
 
     private Rank(String type){
         this.type = type;
     }
 
-    public String getRankNum(){
+    public String getRankNumStr(){
         return this.type;
     }
 

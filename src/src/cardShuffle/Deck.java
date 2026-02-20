@@ -1,45 +1,33 @@
 package cardShuffle;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Scanner;
-import java.util.function.BiConsumer;
-
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import javax.swing.*;
 
 public class Deck {
-    JList<String> deckArr;
+    List<Card> deckArr;
     int size;
 
+    //Card hi = new Card(Suit.CLUBS,Rank.ACE);
     public Deck() {
-        deckArr = new JList<String>();
-        File file;
-        //file = new File("src/cardShuffle/PNG-cards-1.3");
-        //File[] files = file.listFiles();
-        size = 52;
-        try {
-            BufferedReader br = new BufferedReader(
-                    new FileReader("src/cardShuffle/PNG-cards-1.3"));
-        br.close();
-        } catch (Exception ex) {
-            return;
+        deckArr = new ArrayList<>();
+        for (Suit s : Suit.values()) {
+            for (Rank r : Rank.values()) deckArr.add(new Card(s, r));
         }
-
-
-        if (files != null){
-            for (int i = 0; i < size; i++){
-                files[i].getName();
-                String hi = files[i].getPath();
-                deckArr.add(hi,i);
-            }
-        }
-
-
+    }
+    public void shuffle(){
+        Collections.shuffle(deckArr);
     }
 
-    public shuffle
+    public void displayDeck(){
+        for (int i = 0; i < deckArr.size(); i++) {
+            //String message = deckArr.get(i).getRank() + " " + deckArr.get(i).getSuit();
 
-
+            String message = deckArr.get(i).getRankStr() + " " + deckArr.get(i).getSuitStr();
+            System.out.println(message);
+        }
+    }
 
 }
