@@ -2,7 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 // references : https://docs.oracle.com/javase/tutorial/uiswing/components/icon.html
@@ -56,7 +58,7 @@ class CardPanel extends JPanel {
     private ArrayList<String> deck = new ArrayList<>();
     // we will use a hashMap/lookup table to easier find the cards by name\
     // it will store the name of the card as well as it's corresponding image
-    private java.util.HashMap<String, ImageIcon> icons = new java.util.HashMap<>();
+    private HashMap<String, ImageIcon> images = new java.util.HashMap<>();
 
     // create a string array for the different ranks
     private static final String[] ranks = {"ace","2", "3","4","5","6","7","8", "9", "10", "jack", "queen", "king"};
@@ -69,7 +71,8 @@ class CardPanel extends JPanel {
         // may need to change if this green is too bright
         setBackground(Color.GREEN);
 
-        // we will use this double for look to make sure that we add every combination of suits
+        // we will use this double for look to make sure that we add every combination of cards
+        // into the deck list
         for (String rank : ranks){
             for (String suit: suits){
                 deck.add(rank + "_of_" + suit);
@@ -79,7 +82,30 @@ class CardPanel extends JPanel {
         // next step is to extract the images form the folder
         // i put up some references near the top that help me do this
         for (String card : deck) {
-        }
+            // for every card in the deck we are going to find a image that goes with it from the folder
+            URL imgURL = getClass().getResource  ("PNG-cards-1.3/" + card + ".png");
 
-    }
-}
+            // if the image was found...
+            if (imgURL != null){
+                // we create a new icon and fix it to our desired size
+                ImageIcon icon =  new ImageIcon(imgURL);
+                Image fixedImage= icon.getImage().getScaledInstance(80, 120, Image.SCALE_SMOOTH);
+                ImageIcon fixedIcon = new ImageIcon(fixedImage);
+                // we then store it in hashmap 
+                images.put(card, fixedIcon);
+            } else {
+                // if the image is not found print an error
+                System.err.println("Couldn't find this file: " + card + ".png");
+            } // end of else
+        } // end of cards loop
+    } // end of cardPanel constructor
+
+    public void shuffle () {
+        // use the java collections shuffle function
+        Collections.shuffle(deck);
+        // use the java JPanel repaint method which redraws the board for us
+        repaint();
+    } // end of shuffle function
+
+    // need to implement the override the paint component function
+} // end of JPanel class
