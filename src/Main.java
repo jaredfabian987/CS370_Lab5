@@ -40,7 +40,7 @@ public class Main extends JFrame {
         add(shuffleButton, BorderLayout.SOUTH);
 
         // set the size of the window
-        setSize (1400, 700);
+        setSize (1300, 700);
 
         // location and visibility
         setLocationRelativeTo(null);
