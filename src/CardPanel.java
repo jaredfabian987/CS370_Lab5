@@ -8,10 +8,10 @@ public class CardPanel extends JPanel{
 
 
     // this array of type string will store the names of all of the cards
-    private ArrayList<String> deck = new ArrayList<>();
+    private final ArrayList<String> deck = new ArrayList<>();
     // we will use a hashMap/lookup table to easier find the cards by name\
     // it will store the name of the card as well as it's corresponding image
-    private HashMap<String, ImageIcon> images = new java.util.HashMap<>();
+    private final HashMap<String, ImageIcon> images = new java.util.HashMap<>();
 
     private static final int cardWidth = 70;
 
@@ -40,9 +40,13 @@ public class CardPanel extends JPanel{
         } // end of rank loop
 
         for (String card : deck) {
+            // path = nameOfFolder/cardName.png
             String path = "PNG-cards-1/" + card + ".png";
+            // create a new image icon from the card found on the path
             ImageIcon icon = new ImageIcon(path);
+            // scale the image and make sure that it smoothed out when stretched
             Image fixedImage = icon.getImage().getScaledInstance(80, 120, Image.SCALE_SMOOTH);
+            // make it into an ImageIcon type so that we can pass it into our hasmap
             ImageIcon fixedIcon = new ImageIcon(fixedImage);
             images.put(card, fixedIcon);
         } // end of loop
@@ -72,11 +76,19 @@ public class CardPanel extends JPanel{
 
             // figure out which column and row we are on
             int col = i % cols;
+            // remainder will always result in col since it has 12 possible rows and 1 instance where it will
+            // reset back to row 0
             int row = i / cols;
+            // this will result in the row because i will increment and eventually reach 0, 1, 2, 3
+            // as i grows closer to 52
 
             // we need to find where we are going to place the cards on the panel
-            int x = startX + col * (cardWidth + gapX);
-            int y = startY + row * (cardHeight + gapY);
+            int x = (cardWidth + gapX) * col + startX;
+            // add the gap between the cards to the width of the cards then multiply it
+            // to the row we are currently on and then add the x offset that we started by
+            int y = (cardHeight + gapY) * row + startY;
+            // same thing but this time we are doing on the Y axis and adding the height to the Y gap
+            // and multiplying by the amount of rows the adding the y offset
 
             // loop up the card in the hashmap and place it
             ImageIcon icon = images.get(deck.get(i));
