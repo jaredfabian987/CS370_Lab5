@@ -21,7 +21,7 @@ public class CardPanel extends JPanel{
     private static final String[] ranks = {"ace","2", "3","4","5","6","7","8", "9", "10", "jack", "queen", "king"};
 
     // create a string array for the different suits
-    private static final String[] suits = {"clubs","diamonds", "hearts", "spades"};
+    private static final String[] suits = {"spades","hearts", "clubs", "diamonds"};
 
 
     public CardPanel () {
